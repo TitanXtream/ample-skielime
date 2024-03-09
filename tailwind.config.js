@@ -1,3 +1,5 @@
+import { themeOptions } from './src/styles/muiTheme';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
@@ -6,7 +8,11 @@ export default {
     preflight: false,
   },
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        brand_gray: themeOptions.palette.brand_gray,
+      },
+    },
   },
   plugins: [],
 };

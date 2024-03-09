@@ -17,7 +17,7 @@ export default function Mainlayout({ children }: Props) {
   const [isClosing, setIsClosing] = React.useState(false);
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', background: '#F4F7FE', minHeight: '100vh' }}>
       <CssBaseline />
 
       <Topbar
@@ -37,7 +37,7 @@ export default function Mainlayout({ children }: Props) {
         component='main'
         sx={{
           flexGrow: 1,
-          p: 3,
+          px: '3rem',
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >

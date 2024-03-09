@@ -146,7 +146,6 @@ const DrawerContent = () => {
                 }}
                 className='w-[10px] bg-red-800'
               > */}
-              {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
               <Icon icon={opt.icon} color='inherit' className='size-[1.5rem]' />
               {/* </ListItemIcon> */}
               <ListItemText
