@@ -1,19 +1,10 @@
-import { Stack } from '@mui/material';
+import { MainLayout } from './components';
 
 function App() {
   return (
-    <>
-      <Stack
-        direction={'row'}
-        justifyContent={'center'}
-        alignItems={'center'}
-        className='w-full h-screen'
-        // height={'100vh'}
-        // width={'100%'}
-      >
-        <div>Mui + Tailwind</div>
-      </Stack>
-    </>
+    <MainLayout>
+      <div>We are there</div>
+    </MainLayout>
   );
 }
 
