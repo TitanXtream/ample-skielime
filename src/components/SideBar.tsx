@@ -7,6 +7,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Stack,
 } from '@mui/material';
 import { Icon } from '@iconify/react';
 
@@ -77,7 +78,7 @@ const SideBar = ({
           keepMounted: true, // Better open performance on mobile.
         }}
         sx={{
-          display: { xs: 'block', sm: 'none' },
+          display: { xs: 'block', lg: 'none' },
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: drawerWidth,
@@ -85,13 +86,12 @@ const SideBar = ({
           },
         }}
       >
-        {/* {drawer} */}
         <DrawerContent />
       </Drawer>
       <Drawer
         variant='permanent'
         sx={{
-          display: { xs: 'none', sm: 'block' },
+          display: { xs: 'none', lg: 'block' },
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: drawerWidth,
@@ -100,7 +100,6 @@ const SideBar = ({
         }}
         open
       >
-        {/* {drawer} */}
         <DrawerContent />
       </Drawer>
     </Box>
@@ -112,31 +111,51 @@ export default SideBar;
 const DrawerContent = () => {
   const [activeOpt, setActiveOpt] = useState('job-postings');
   return (
-    <div className='px-[1rem] py-[2.5rem] flex flex-col items-center gap-y-[4rem]'>
+    <Stack
+      direction={'column'}
+      alignItems={'center'}
+      px={'1rem'}
+      py={'2.5rem'}
+      columnGap={'4rem'}
+      // className='px-[1rem] py-[2.5rem] gap-y-[4rem]'
+    >
       <Logo />
       <List
-        className='w-full'
+        // className='w-full'
         sx={{
           fontFamily: 'Open Sans',
+          width: '100%',
         }}
       >
         {sidebarProps.map((opt) => (
           <ListItem
             key={opt.id}
             disablePadding
-            className={`${
-              opt.id === activeOpt ? 'text-white' : 'text-white/50'
-            }`}
+            sx={{
+              color: opt.id === activeOpt ? 'white' : '#ffffff50',
+            }}
           >
             <ListItemButton
               sx={{
                 borderRight: opt.id === activeOpt ? '4px solid white' : '0px',
+                py: '0.7rem',
+                display: 'flex',
+                justifyContent: 'start',
+                gap: '1em',
+                ...(opt.id === activeOpt
+                  ? {
+                      pl: '1rem',
+                      pr: 'calc(1rem_-_4px)',
+                    }
+                  : {
+                      px: '1rem',
+                    }),
               }}
-              className={`py-[0.7rem] flex gap-[1rem] justify-start ${
-                opt.id === activeOpt
-                  ? 'pl-[1rem] pr-[calc(1rem_-_4px)]'
-                  : 'px-[1rem]'
-              }`}
+              // className={`py-[0.7rem] flex gap-[1rem] justify-start ${
+              //   opt.id === activeOpt
+              //     ? 'pl-[1rem] pr-[calc(1rem_-_4px)]'
+              //     : 'px-[1rem]'
+              // }`}
               onClick={() => setActiveOpt(opt.id)}
             >
               {/* <ListItemIcon
@@ -146,7 +165,16 @@ const DrawerContent = () => {
                 }}
                 className='w-[10px] bg-red-800'
               > */}
-              <Icon icon={opt.icon} color='inherit' className='size-[1.5rem]' />
+
+              <Icon
+                icon={opt.icon}
+                color='inherit'
+                // className='size-[1.5rem]'
+                style={{
+                  width: '1.5rem',
+                  height: '1.5rem',
+                }}
+              />
               {/* </ListItemIcon> */}
               <ListItemText
                 primaryTypographyProps={{
@@ -158,12 +186,19 @@ const DrawerContent = () => {
           </ListItem>
         ))}
       </List>
-    </div>
+    </Stack>
   );
 };
 
 const Logo = () => {
-  return <img src={logo} className='h-[5rem]' />;
+  return (
+    <img
+      src={logo}
+      style={{
+        height: '5rem',
+      }}
+    />
+  );
 };
 
 // const Option = () => {

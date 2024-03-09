@@ -4,6 +4,9 @@ import {
   Badge,
   Box,
   Button,
+  IconButton,
+  Menu,
+  MenuItem,
   Stack,
   Toolbar,
   Typography,
@@ -39,16 +42,14 @@ const Topbar = ({
 
   return (
     <AppBar
-      // color='red'
       component={'header'}
       position='fixed'
       sx={{
-        // backgroundImage: headerBgImage,
         backgroundImage: `url('${headerBgImage}')`,
         backgroundColor: '#1490C9',
         backgroundPositionY: '50%',
-        width: { sm: `calc(100% - ${drawerWidth}px)` },
-        ml: { sm: `${drawerWidth}px` },
+        width: { lg: `calc(100% - ${drawerWidth}px)` },
+        ml: { lg: `${drawerWidth}px` },
       }}
       className='bg-blend-overlay'
     >
@@ -60,21 +61,25 @@ const Topbar = ({
           justifyContent: 'space-between',
         }}
       >
-        <Button
-          color='inherit'
-          // aria-label='open drawer'
-          // edge='start'
-          onClick={handleDrawerToggle}
-          sx={{ mr: 2, display: { sm: 'none' } }}
+        <Stack direction={'row'} gap={'0.5rem'}>
+          <IconButton
+            sx={{
+              display: { lg: 'none' },
+              borderRadius: '5px',
+            }}
+            onClick={handleDrawerToggle}
+          >
+            <Icon icon={'flowbite:bars-outline'} className='size-[1.5rem]' />
+          </IconButton>
+
+          <SplitButton />
+        </Stack>
+        <Box
+          display={{
+            xs: 'none',
+            md: 'block',
+          }}
         >
-          {/* <MenuIcon /> */}
-          Click here
-        </Button>
-        {/* <Typography variant='h6' noWrap component='div'>
-          Responsive drawer
-        </Typography> */}
-        <SplitButton />
-        <Box>
           <Typography
             className='font-bold text-[1.25rem]'
             fontFamily={'Poppins'}
@@ -82,27 +87,9 @@ const Topbar = ({
             Developing <span className='text-[#051C2E]'>great products</span>
             <span className='italic font-normal'>, fast.</span>
           </Typography>
-          {/* <Typography>Developing</Typography>
-          <Typography></Typography>
-          <Typography></Typography> */}
         </Box>
-        <Stack direction={'row'} gap={'2rem'} alignItems={'center'}>
-          <Badge
-            badgeContent={4}
-            color='primary'
-            sx={{
-              '& .MuiBadge-badge': {
-                height: '1.5rem',
-                width: '1.5rem',
-                fontSize: '0.9rem',
-                fontWeight: 700,
-              },
-            }}
-          >
-            <Icon icon={'iconoir:bell'} className='size-[1.5rem]' />
-          </Badge>
-          <AppBarProfile />
-        </Stack>
+        {/* <S direction={'row'} gap={'2rem'} alignItems={'center'}> */}
+        <AppBarProfile />
       </Toolbar>
     </AppBar>
   );
@@ -229,16 +216,51 @@ function SplitButton() {
 }
 
 const AppBarProfile = () => {
-  return (
-    <Stack direction={'row'} gap={'0.5rem'} pr={'3rem'}>
-      <Avatar src={avatarImage} className='size-[2.75rem]'>
-        J
-      </Avatar>
-      <Stack direction={'column'}>
+  const [profileAnchorEl, setProfileAnchorEl] =
+    React.useState<null | HTMLElement>(null);
+
+  const isMobileMenuOpen = Boolean(profileAnchorEl);
+  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setProfileAnchorEl(event.currentTarget);
+  };
+  const handleProfileMenuClose = () => {
+    setProfileAnchorEl(null);
+  };
+
+  const profileMenuId = 'primary-search-account-menu-mobile';
+  const profileMenu = (
+    <Menu
+      anchorEl={profileAnchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      id={profileMenuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMobileMenuOpen}
+      onClose={handleProfileMenuClose}
+      sx={{
+        top: '3.5rem',
+      }}
+    >
+      <Stack
+        direction={'row'}
+        px={'1rem'}
+        py={'0.5rem'}
+        gap={'1rem'}
+        alignItems={'end'}
+      >
         <Typography
           fontFamily={'Open Sans'}
-          fontSize={'1rem'}
+          fontSize={'1.2rem'}
           fontWeight={'700'}
+          sx={{
+            textTransform: 'uppercase',
+          }}
         >
           Jerry
         </Typography>
@@ -246,6 +268,112 @@ const AppBarProfile = () => {
           Admin
         </Typography>
       </Stack>
+      <MenuItem
+        sx={{
+          display: 'flex',
+          gap: '1rem',
+        }}
+      >
+        <Badge
+          badgeContent={4}
+          color='primary'
+          sx={{
+            '& .MuiBadge-badge': {
+              height: '1.5rem',
+              width: '1.5rem',
+              fontSize: '0.9rem',
+              fontWeight: 700,
+            },
+          }}
+        >
+          <Icon
+            icon={'iconoir:bell'}
+            style={{
+              height: '1.5rem',
+            }}
+          />
+        </Badge>
+        <p>Notifications</p>
+      </MenuItem>
+      {/* <MenuItem>
+        <IconButton
+          size='large'
+          aria-label='show 17 new notifications'
+          color='inherit'
+        >
+          <Badge badgeContent={17} color='error'>
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+        <p>Notifications</p>
+      </MenuItem>
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+          size='large'
+          aria-label='account of current user'
+          aria-controls='primary-search-account-menu'
+          aria-haspopup='true'
+          color='inherit'
+        >
+          <AccountCircle />
+        </IconButton>
+        <p>Profile</p>
+      </MenuItem> */}
+    </Menu>
+  );
+
+  return (
+    <Stack direction={'row'} gap={'2rem'} alignItems={'center'}>
+      <IconButton>
+        <Badge
+          badgeContent={4}
+          color='primary'
+          sx={{
+            display: { xs: 'none', sm: 'flex' },
+            '& .MuiBadge-badge': {
+              height: '1.5rem',
+              width: '1.5rem',
+              fontSize: '0.9rem',
+              fontWeight: 700,
+            },
+          }}
+        >
+          <Icon icon={'iconoir:bell'} className='size-[1.5rem]' />
+        </Badge>
+      </IconButton>
+      <IconButton
+        sx={{
+          display: { xs: 'flex', sm: 'none' },
+        }}
+        onClick={handleProfileMenuOpen}
+      >
+        <Avatar src={avatarImage} className='size-[2.75rem]'>
+          J
+        </Avatar>
+      </IconButton>
+      <Stack
+        direction={'row'}
+        gap={'0.5rem'}
+        pr={{ sm: '3rem', xs: 'none' }}
+        display={{ xs: 'none', sm: 'flex' }}
+      >
+        <Avatar src={avatarImage} className='size-[2.75rem]'>
+          J
+        </Avatar>
+        <Stack direction={'column'}>
+          <Typography
+            fontFamily={'Open Sans'}
+            fontSize={'1rem'}
+            fontWeight={'700'}
+          >
+            Jerry
+          </Typography>
+          <Typography fontFamily={'Open Sans'} fontSize={'0.9rem'}>
+            Admin
+          </Typography>
+        </Stack>
+      </Stack>
+      {profileMenu}
     </Stack>
   );
 };
