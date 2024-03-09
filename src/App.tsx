@@ -28,7 +28,9 @@ function App() {
             justifyContent={'center'}
             borderRadius={'50%'}
           >
-            <Typography fontSize={'0.75rem'}>8</Typography>
+            <Typography fontSize={'0.75rem'} fontWeight={600}>
+              8
+            </Typography>
           </Stack>
         </Stack>
         <Button

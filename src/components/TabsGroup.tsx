@@ -53,7 +53,15 @@ const TabsGroup = () => {
           }}
         >
           {tabs.map((tab, i) => (
-            <Tab label={tab} {...a11yProps(i)} />
+            <Tab
+              label={tab}
+              {...a11yProps(i)}
+              sx={{
+                textTransform: 'none',
+                fontWeight: 600,
+                fontSize: '1rem',
+              }}
+            />
           ))}
         </Tabs>
       </Box>
