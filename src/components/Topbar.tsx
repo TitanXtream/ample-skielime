@@ -59,7 +59,10 @@ const Topbar = ({
           height: '6rem',
           display: 'flex',
           justifyContent: 'space-between',
+          px: { sm: '3rem', xs: '1.5rem' },
+          gap: '0px',
         }}
+        disableGutters
       >
         <Stack direction={'row'} gap={'0.5rem'}>
           <IconButton
@@ -324,12 +327,17 @@ const AppBarProfile = () => {
 
   return (
     <Stack direction={'row'} gap={'2rem'} alignItems={'center'}>
-      <IconButton>
+      <IconButton
+        sx={{
+          display: { xs: 'none', sm: 'flex' },
+        }}
+      >
         <Badge
           badgeContent={4}
           color='primary'
           sx={{
-            display: { xs: 'none', sm: 'flex' },
+            display: 'flex',
+            color: 'white',
             '& .MuiBadge-badge': {
               height: '1.5rem',
               width: '1.5rem',
@@ -354,7 +362,7 @@ const AppBarProfile = () => {
       <Stack
         direction={'row'}
         gap={'0.5rem'}
-        pr={{ sm: '3rem', xs: 'none' }}
+        pr={{ sm: '1rem', xs: 'none' }}
         display={{ xs: 'none', sm: 'flex' }}
       >
         <Avatar src={avatarImage} className='size-[2.75rem]'>

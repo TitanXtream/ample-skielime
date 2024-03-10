@@ -1,5 +1,12 @@
 import { Icon } from '@iconify/react/dist/iconify.js';
-import { Button, Paper, Stack, Typography, useTheme } from '@mui/material';
+import {
+  Button,
+  IconButton,
+  Paper,
+  Stack,
+  Typography,
+  useTheme,
+} from '@mui/material';
 import { JobPostCard } from '.';
 
 const ActivityTab = () => {
@@ -22,52 +29,67 @@ const JobSearchBar = () => {
         borderRadius: '0.5rem',
       }}
       elevation={0}
+      className='@container'
     >
       <Stack
         px={'0.5rem'}
         direction={'row'}
-        justifyContent={'space-between'}
-        gap={'2rem'}
+        justifyContent={{ sm: 'space-between', xs: 'initial' }}
+        gap={{ sm: '2rem', xs: '1rem' }}
       >
         <Stack
           direction={'row'}
           gap={'0.75rem'}
           alignItems={'center'}
-          width={'40rem'}
+          maxWidth={'40rem'}
+          width={'100%'}
+          minWidth={0}
         >
-          <Icon icon={'oui:search'} className='text-gray-500 size-[1rem]' />
-          <Typography className='text-[0.9rem]'>
+          <Icon
+            icon={'oui:search'}
+            className='text-gray-500 size-[1rem] ml-[0.5rem]'
+          />
+          <Typography className='text-[0.9rem] truncate min-w-0' flexShrink={2}>
             Search for a job posting title
           </Typography>
           <Button
             endIcon={<Icon icon={'icon-park:down'} />}
             sx={{
-              px: '1rem',
+              px: '0.625rem',
               py: '0.5rem',
               textTransform: 'none',
               display: 'flex',
-              columnGap: '0.625rem',
-              paddingX: '0.625rem',
+
               ml: 'auto',
             }}
             disableRipple
           >
-            <Typography
-              color={theme.palette.brand_gray[700]}
-              fontSize={'0.9rem'}
-            >
-              Sort by:
-            </Typography>
-            <Typography
-              color={theme.palette.brand_gray[800]}
-              fontSize={'0.9rem'}
-              fontWeight={600}
-            >
-              Date posted
-            </Typography>
+            <Stack direction={{ xs: 'column', sm: 'row' }} flexShrink={0}>
+              <Typography
+                color={theme.palette.brand_gray[700]}
+                fontSize={'0.9rem'}
+              >
+                Sort by:
+              </Typography>
+              <Typography
+                color={theme.palette.brand_gray[800]}
+                fontSize={'0.9rem'}
+                fontWeight={600}
+              >
+                Date posted
+              </Typography>
+            </Stack>
           </Button>
         </Stack>
-        <Stack direction={'row'} gap={'1.5rem'} flexShrink={0}>
+        <IconButton className='@[1200px]:hidden flex'>
+          <Icon icon={'flowbite:bars-outline'} className='size-[1.5rem]' />
+        </IconButton>
+        <Stack
+          direction={'row'}
+          gap={'1.5rem'}
+          flexShrink={0}
+          className='@[1200px]:flex hidden'
+        >
           <Button
             startIcon={<Icon icon={'uil:calender'} />}
             sx={{

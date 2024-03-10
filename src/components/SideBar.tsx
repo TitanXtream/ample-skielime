@@ -65,7 +65,11 @@ const SideBar = ({
   return (
     <Box
       component='nav'
-      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+      sx={{
+        width: { lg: drawerWidth },
+        flexShrink: { lg: 0 },
+        background: 'red',
+      }}
       aria-label='mailbox folders'
     >
       <Drawer

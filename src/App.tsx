@@ -6,12 +6,13 @@ function App() {
   return (
     <MainLayout>
       <Stack
-        direction={'row'}
+        direction={{ md: 'row', xs: 'column' }}
         columnGap={'1rem'}
-        alignItems={'center'}
+        alignItems={{ md: 'center', xs: 'start' }}
         justifyContent={'space-between'}
         width={'100%'}
         py={'1.25rem'}
+        gap={'1rem'}
       >
         <Stack direction={'row'} columnGap={'1rem'} alignItems={'center'}>
           <Typography variant='h4' fontWeight={700}>

@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs } from '@mui/material';
+import { Box, Tab, Tabs, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { ActivityTab } from '.';
 
@@ -69,10 +69,10 @@ const TabsGroup = () => {
         <ActivityTab />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Item Two
+        <Typography fontSize={'1.5rem'}>Under development</Typography>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Item Three
+        <Typography fontSize={'1.5rem'}>Under development</Typography>
       </CustomTabPanel>
     </>
   );

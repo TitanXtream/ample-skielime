@@ -34,7 +34,7 @@ export default function Mainlayout({ children }: Props) {
         component='main'
         sx={{
           flexGrow: 1,
-          px: '3rem',
+          px: { sm: '3rem', xs: '1.5rem' },
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           pb: '1.5rem',
         }}
