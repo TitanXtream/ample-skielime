@@ -35,7 +35,7 @@ const tabs = ['Active', 'Drafts', 'Archive'];
 const TabsGroup = () => {
   const [value, setValue] = useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
@@ -54,6 +54,7 @@ const TabsGroup = () => {
         >
           {tabs.map((tab, i) => (
             <Tab
+              key={i}
               label={tab}
               {...a11yProps(i)}
               sx={{
